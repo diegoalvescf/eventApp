@@ -1,0 +1,5 @@
+{
+    "eslint.problems.shortenToSingleLine": false,
+    "prettier.jsxSingleQuote": false,
+    "prettier.singleQuote": true
+}
