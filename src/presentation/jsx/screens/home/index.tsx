@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { ParticipantComponent } from '../../components/Participant';
 import { PARTICIPANTS } from './data';
@@ -14,7 +14,24 @@ import {
 } from './styles';
 
 export function Home() {
-  function handleParticipantAdd() {}
+  const [participants, setParticipants] =
+    useState<IParticipant[]>(PARTICIPANTS);
+
+  function handleParticipantAdd() {
+    const isParticipantAlreadyExists = PARTICIPANTS.some(
+      (participant) => participant.name === 'Disadaego'
+    );
+
+    if (isParticipantAlreadyExists)
+      return Alert.alert(
+        'Nome já cadastrado',
+        'Esse nome já esta inscrito no evento!'
+      );
+
+    setParticipants((prevState) => [...prevState, { id: 123, name: 'Ana' }]);
+
+    console.log('💩 ->', PARTICIPANTS);
+  }
 
   function handleParticipantDel(participant: IParticipant) {
     Alert.alert('Remover', `Remover o participante ${participant.name} ?`, [
@@ -39,7 +56,7 @@ export function Home() {
       </FormContainer>
 
       <ParticipantsList
-        data={PARTICIPANTS}
+        data={participants}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
           <ParticipantComponent
