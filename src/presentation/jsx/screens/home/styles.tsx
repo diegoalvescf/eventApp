@@ -1,4 +1,10 @@
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
@@ -43,3 +49,7 @@ export const FormContainer = styled(View)`
 `;
 
 export const ButtonAddComponent = styled(ButtonComponent)``;
+
+export const ParticipantsList = styled(ScrollView).attrs({
+  showsVerticalScrollIndicator: false,
+})``;
