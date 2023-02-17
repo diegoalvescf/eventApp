@@ -7,7 +7,7 @@ Utilizado no projeto:
 - Styled-Components
 - TypeScript
 
-#Funcionalidades e praticas utilizadas
+# Funcionalidades e praticas utilizadas
 
 - Tipagem e interfaces
 - FlatList com tipagem
