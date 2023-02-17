@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { ParticipantComponent } from '../../components/Participant';
+import { formatDate } from '../../helpers/format-date';
+import { RandomIdGenerator } from '../../helpers/random-id-generator';
 import { PARTICIPANTS } from './data';
 import { IParticipant } from './props';
+
 import {
   ButtonAddComponent,
   Container,
@@ -14,12 +17,13 @@ import {
 } from './styles';
 
 export function Home() {
+  const [participantName, setParticipantName] = useState('');
   const [participants, setParticipants] =
     useState<IParticipant[]>(PARTICIPANTS);
 
   function handleParticipantAdd() {
     const isParticipantAlreadyExists = PARTICIPANTS.some(
-      (participant) => participant.name === 'Disadaego'
+      (participant) => participant.name === participantName
     );
 
     if (isParticipantAlreadyExists)
@@ -28,16 +32,26 @@ export function Home() {
         'Esse nome já esta inscrito no evento!'
       );
 
-    setParticipants((prevState) => [...prevState, { id: 123, name: 'Ana' }]);
+    const id = RandomIdGenerator();
 
-    console.log('💩 ->', PARTICIPANTS);
+    setParticipants((prevState) => [
+      ...prevState,
+      { id: id, name: participantName },
+    ]);
+
+    setParticipantName('');
   }
 
   function handleParticipantDel(participant: IParticipant) {
     Alert.alert('Remover', `Remover o participante ${participant.name} ?`, [
       {
         text: 'Sim',
-        onPress: () => Alert.alert('Deletado'),
+        onPress: () => {
+          setParticipants((prevState) =>
+            prevState.filter((item) => item.id !== participant.id)
+          ),
+            Alert.alert('removido!');
+        },
       },
       {
         text: 'Não',
@@ -45,19 +59,24 @@ export function Home() {
       },
     ]);
   }
+
   return (
     <Container>
       <EventTitle>Nome do evento</EventTitle>
-      <EventDateLabel>Sexta, 4 de Novembro de 2022.</EventDateLabel>
+      <EventDateLabel>{formatDate()}</EventDateLabel>
       <FormContainer>
-        <Input placeholder="Nome do participante" />
+        <Input
+          placeholder="Nome do participante"
+          value={participantName}
+          onChangeText={setParticipantName}
+        />
 
         <ButtonAddComponent title="+" onPress={handleParticipantAdd} />
       </FormContainer>
 
       <ParticipantsList
         data={participants}
-        keyExtractor={(item) => String(item.id)}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <ParticipantComponent
             key={item.id}
