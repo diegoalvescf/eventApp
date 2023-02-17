@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { ParticipantComponent } from '../../components/Participant';
 import { PARTICIPANTS } from './data';
 import { IParticipant } from './props';
@@ -13,12 +14,19 @@ import {
 } from './styles';
 
 export function Home() {
-  function handleParticipantAdd() {
-    console.log('💩 -> add');
-  }
+  function handleParticipantAdd() {}
 
   function handleParticipantDel(participant: IParticipant) {
-    console.log('💩 -> participant', participant);
+    Alert.alert('Remover', `Remover o participante ${participant.name} ?`, [
+      {
+        text: 'Sim',
+        onPress: () => Alert.alert('Deletado'),
+      },
+      {
+        text: 'Não',
+        style: 'cancel',
+      },
+    ]);
   }
   return (
     <Container>
@@ -30,15 +38,17 @@ export function Home() {
         <ButtonAddComponent title="+" onPress={handleParticipantAdd} />
       </FormContainer>
 
-      <ParticipantsList>
-        {PARTICIPANTS.map((item) => (
+      <ParticipantsList
+        data={PARTICIPANTS}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }) => (
           <ParticipantComponent
             key={item.id}
             title={item.name}
             onPress={() => handleParticipantDel(item)}
           />
-        ))}
-      </ParticipantsList>
+        )}
+      />
     </Container>
   );
 }

@@ -1,14 +1,9 @@
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, Text, TextInput, View } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 import { ButtonComponent } from '../../components/button';
+import { IParticipant } from './props';
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
@@ -50,6 +45,8 @@ export const FormContainer = styled(View)`
 
 export const ButtonAddComponent = styled(ButtonComponent)``;
 
-export const ParticipantsList = styled(ScrollView).attrs({
+export const ParticipantsList = styled(
+  FlatList as new () => FlatList<IParticipant>
+).attrs({
   showsVerticalScrollIndicator: false,
-})``;
+})`` as unknown as typeof FlatList;
