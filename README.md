@@ -10,8 +10,13 @@ Utilizado no projeto:
 # Funcionalidades e praticas utilizadas
 
 - Tipagem e interfaces
+- Hooks
 - FlatList com tipagem
 - Alert com confirmação
 - Componentização
 - Função para gerar ID
-- Função para resgatar data
+- Função para resgatar e formatar data
+
+# TODO
+
+- Implementar armazenamento local.
