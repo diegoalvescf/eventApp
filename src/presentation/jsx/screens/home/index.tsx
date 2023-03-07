@@ -13,7 +13,9 @@ import {
   EventTitle,
   FormContainer,
   Input,
+  Label,
   ParticipantsList,
+  Section,
 } from './styles';
 
 export function Home() {
@@ -71,20 +73,32 @@ export function Home() {
           onChangeText={setParticipantName}
         />
 
-        <ButtonAddComponent title="+" onPress={handleParticipantAdd} />
+        <ButtonAddComponent
+          title="+"
+          onPress={handleParticipantAdd}
+        />
       </FormContainer>
 
-      <ParticipantsList
-        data={participants}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ParticipantComponent
-            key={item.id}
-            title={item.name}
-            onPress={() => handleParticipantDel(item)}
-          />
-        )}
-      />
+      {participants.length > 0 ? (
+        <ParticipantsList
+          data={participants}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <ParticipantComponent
+              key={item.id}
+              title={item.name}
+              onPress={() => handleParticipantDel(item)}
+            />
+          )}
+        />
+      ) : (
+        <Section>
+          <Label>
+            Ninguém chegou no evento ainda? Adicione participantes a sua lista
+            de presença.
+          </Label>
+        </Section>
+      )}
     </Container>
   );
 }

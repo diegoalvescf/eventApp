@@ -50,3 +50,13 @@ export const ParticipantsList = styled(
 ).attrs({
   showsVerticalScrollIndicator: false,
 })`` as unknown as typeof FlatList;
+
+export const Section = styled(View)`
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Label = styled(Text)`
+  color: #ffffff;
+  font-size: ${RFValue(14)}px;
+`;
