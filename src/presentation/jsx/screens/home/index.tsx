@@ -79,26 +79,23 @@ export function Home() {
         />
       </FormContainer>
 
-      {participants.length > 0 ? (
-        <ParticipantsList
-          data={participants}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <ParticipantComponent
-              key={item.id}
-              title={item.name}
-              onPress={() => handleParticipantDel(item)}
-            />
-          )}
-        />
-      ) : (
-        <Section>
+      <ParticipantsList
+        data={participants}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <ParticipantComponent
+            key={item.id}
+            title={item.name}
+            onPress={() => handleParticipantDel(item)}
+          />
+        )}
+        ListEmptyComponent={() => (
           <Label>
             Ninguém chegou no evento ainda? Adicione participantes a sua lista
             de presença.
           </Label>
-        </Section>
-      )}
+        )}
+      />
     </Container>
   );
 }

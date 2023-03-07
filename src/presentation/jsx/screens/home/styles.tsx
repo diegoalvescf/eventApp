@@ -57,6 +57,7 @@ export const Section = styled(View)`
 `;
 
 export const Label = styled(Text)`
-  color: #ffffff;
+  color: #fff;
   font-size: ${RFValue(14)}px;
+  text-align: center;
 `;
